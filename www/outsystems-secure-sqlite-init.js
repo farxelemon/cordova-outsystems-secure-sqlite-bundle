@@ -86,7 +86,7 @@ function acquireLsk(successCallback, errorCallback) {
                     navigator.app.exitApp();
                 } else if (error.message === "Device is not secure") {
                     Logger.logError("Device is not secure.", "SecureSQLiteBundle");
-                    if (window.confirm("In order to use this app, your device must have a secure lock screen. Press OK to setup your device.")) {
+                    if (window.confirm("Para usar esta aplicação, o seu dispositivo deve ter o ecrã de bloqueio protegido. Pressione OK para definir.")) {
                         ss.secureDevice(
                             initFn,
                             function() {
