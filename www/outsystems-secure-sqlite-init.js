@@ -197,7 +197,13 @@ window.sqlitePlugin.openDatabase = function(options, successCallback, errorCallb
 
             // Validate the options and call the original openDatabase
             validateDbOptions(newOptions);
-            return originalOpenDatabase.call(window.sqlitePlugin, newOptions, successCallback, errorCallback);
+            return originalOpenDatabase.call(window.sqlitePlugin, newOptions, successCallback, function() {
+		    sqlitePlugin.deleteDatabase(options, function() {
+			    window.sqlitePlugin.openDatabase(options, successCallback, errorCallback);
+		    }, function() {
+			    errorCallback();
+		    });
+	    });
         },
         errorCallback);
 };
